@@ -1,116 +1,131 @@
 # Telegram AI Bot
 
-Bot de Telegram con inteligencia artificial usando la API de Claude (Anthropic). Mantiene contexto de conversación por usuario y responde en el idioma del usuario.
+A Telegram bot powered by the Claude API (Anthropic). It maintains per-user conversation context, supports natural multi-turn dialogue, and includes utility commands for translation and summarization.
 
-## Características
+## Features
 
--  Conversación natural con memoria de contexto
--  Responde en el idioma del usuario automáticamente
--  Resumen de conversación con IA
--  Comando para limpiar el historial
--  Indicador de "escribiendo..." mientras procesa
+- Natural conversation with persistent context per user
+- Responds in the same language the user writes in
+- AI-generated conversation summaries
+- Text translation to any language
+- Text summarization
+- Per-user message statistics
+- Typing indicator while the bot processes a response
 
-## Estructura del proyecto
+## Project structure
 
 ```
-telegram-ai-bot/
+claude-bot-telegram/
 ├── src/
-│   ├── bot.py          # Lógica principal del bot de Telegram
-│   └── ai_client.py    # Cliente para la API de Claude
+│   ├── bot.py          # Telegram bot logic and command handlers
+│   └── ai_client.py    # Claude API client and AI utility functions
 ├── tests/
 │   └── test_ai_client.py
-├── .env.example        # Plantilla de variables de entorno
+├── .env.example
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
 
-##  Instalación paso a paso
+## Installation
 
-### 1. Cloná el repositorio
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/tu-usuario/telegram-ai-bot.git
-cd telegram-ai-bot
+git clone https://github.com/Vlonetatii3/claude-bot-telegram.git
+cd claude-bot-telegram
 ```
 
-### 2. Creá un entorno virtual
+### 2. Create a virtual environment
 
 ```bash
 python -m venv venv
 
-# En Windows:
+# Windows
 venv\Scripts\activate
 
-# En Mac/Linux:
+# macOS / Linux
 source venv/bin/activate
 ```
 
-### 3. Instalá las dependencias
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Obtené tus credenciales
+### 4. Get your credentials
 
-**Token de Telegram:**
-1. Abrí Telegram y buscá `@BotFather`
-2. Enviá `/newbot`
-3. Seguí las instrucciones y copiá el token
+**Telegram bot token:**
+1. Open Telegram and search for `@BotFather`
+2. Send `/newbot` and follow the prompts
+3. Copy the token you receive
 
-**API Key de Anthropic:**
-1. Entrá a [console.anthropic.com](https://console.anthropic.com)
-2. Creá una cuenta y generá una API key
+**Anthropic API key:**
+1. Go to [console.anthropic.com](https://console.anthropic.com)
+2. Create an account and generate an API key
 
-### 5. Configurá las variables de entorno
+### 5. Configure environment variables
 
 ```bash
 cp .env.example .env
 ```
 
-Editá `.env` con tus credenciales:
+Edit `.env` with your credentials:
 
 ```env
-TELEGRAM_BOT_TOKEN=tu_token_de_telegram
-ANTHROPIC_API_KEY=tu_api_key_de_anthropic
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+ANTHROPIC_API_KEY=your_anthropic_api_key
 ```
 
-### 6. Ejecutá el bot
+### 6. Run the bot
 
 ```bash
 python src/bot.py
 ```
 
-##  Comandos disponibles
+## Commands
 
-| Comando | Descripción |
+| Command | Description |
 |---------|-------------|
-| `/start` | Mensaje de bienvenida |
-| `/help` | Muestra ayuda |
-| `/clear` | Limpia el historial de conversación |
-| `/history` | Genera un resumen de la conversación |
+| `/start` | Show the welcome message and command list |
+| `/help` | Show usage instructions |
+| `/clear` | Erase the conversation history and start fresh |
+| `/history` | Get an AI-generated summary of the conversation |
+| `/stats` | Show your message count and session statistics |
+| `/translate <language> <text>` | Translate text to any language |
+| `/summarize <text>` | Get a concise summary of a block of text |
+| `/about` | Show version and bot information |
 
-##  Tests
+### Examples
+
+```
+/translate French Good morning, how are you?
+/summarize Paste a long article or paragraph here and get a concise summary.
+```
+
+## Running tests
 
 ```bash
 python -m pytest tests/
 ```
 
-##  Personalización
+## Customization
 
-Para cambiar la personalidad del bot, editá `SYSTEM_PROMPT` en `src/ai_client.py`:
+To change the bot's personality or behavior, edit `SYSTEM_PROMPT` in `src/ai_client.py`:
 
 ```python
-SYSTEM_PROMPT = """Sos un asistente experto en Python que ayuda a programadores...
+SYSTEM_PROMPT = """You are an expert Python tutor helping developers learn..."""
 ```
 
-##  Tecnologías usadas
+To adjust the maximum number of messages kept in context, change `MAX_HISTORY_MESSAGES` in the same file (default: 20).
 
-- [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) — SDK de Telegram
-- [Anthropic Python SDK](https://github.com/anthropic-ai/anthropic-sdk-python) — API de Claude
-- [python-dotenv](https://github.com/theskumar/python-dotenv) — manejo de variables de entorno
+## Technologies
 
-## 📄 Licencia
+- [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) - Telegram Bot API wrapper
+- [Anthropic Python SDK](https://github.com/anthropics/anthropic-sdk-python) - Claude API client
+- [python-dotenv](https://github.com/theskumar/python-dotenv) - environment variable management
+
+## License
 
 MIT
